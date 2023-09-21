@@ -1,33 +1,43 @@
 {
-  "name": "ore-pper",
+  "name": "ore-pper-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "scripts": {
-    "clean": "rm -rf ./dist",
-    "build": "npm run clean && tsc --build tsconfig.json",
-    "test": "jest",
-    "start": "npm run build && ./bin/cmd add"
-  },
+  "description": "ore-pper CLI tool",
+  "main": "dist/src/index.js",
   "bin": {
-    "ore-pper": "bin/cmd"
+    "@glamboyosa/create-readmes": "./dist/bin/create-readmes.js",
+    "create-readmes": "./dist/bin/create-readmes.js"
   },
-  "dependencies": {
-    "@lesy/compiler": "^1.0.0-beta.18",
-    "@lesy/lesy-plugin-pilot": "^1.0.0-beta.18"
+  "publishConfig": {
+    "access": "public"
   },
-  "devDependencies": {
-    "@lesy/testbed": "^1.0.0-beta.18",
-    "@types/jest": "^24.0.19",
-    "@types/node": "^12.11.1",
-    "copyfiles": "^2.1.1",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "devjs": "nodemon dist/src/index.js"
   },
   "keywords": [
-    "lesy"
+    "cli",
+    "create-readmes"
   ],
-  "author": "",
-  "license": "MIT"
+  "files": [
+    "dist/",
+    "bin/",
+    "templates/"
+  ],
+  "author": "Timothy Ogbemudia",
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/confirm": "^2.0.12",
+    "@inquirer/input": "^1.2.11",
+    "@inquirer/select": "^1.2.11",
+    "inquirer": "^9.2.11",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/ncp": "^2.0.5",
+    "@types/node": "^20.6.3",
+    "typescript": "^5.2.2"
+  }
 }
