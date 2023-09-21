@@ -4,8 +4,7 @@
   "description": "ore-pper CLI tool",
   "main": "dist/src/index.js",
   "bin": {
-    "@glamboyosa/create-readmes": "./dist/bin/create-readmes.js",
-    "create-readmes": "./dist/bin/create-readmes.js"
+    "ore-pper": "./dist/bin/ore-pper-cli.js"
   },
   "publishConfig": {
     "access": "public"
@@ -16,13 +15,11 @@
     "devjs": "nodemon dist/src/index.js"
   },
   "keywords": [
-    "cli",
-    "create-readmes"
+    "cli"
   ],
   "files": [
     "dist/",
-    "bin/",
-    "templates/"
+    "bin/"
   ],
   "author": "Timothy Ogbemudia",
   "license": "MIT",
@@ -30,13 +27,10 @@
     "@inquirer/confirm": "^2.0.12",
     "@inquirer/input": "^1.2.11",
     "@inquirer/select": "^1.2.11",
-    "inquirer": "^9.2.11",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.3",
-    "@types/ncp": "^2.0.5",
     "@types/node": "^20.6.3",
     "typescript": "^5.2.2"
   }

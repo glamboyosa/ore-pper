@@ -10,7 +10,6 @@ import fs from "fs/promises";
 import fss from "fs";
 const execAsync = util.promisify(exec);
 
-//import chalk from "chalk";
 interface projectOptions {
   preferredPackageManager?: "npm" | "yarn" | "pnpm";
   useFramer: boolean;
