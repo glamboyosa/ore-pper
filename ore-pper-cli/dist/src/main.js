@@ -20,7 +20,7 @@ const path_1 = __importDefault(require("path"));
 const promises_1 = __importDefault(require("fs/promises"));
 const fs_1 = __importDefault(require("fs"));
 const execAsync = util_1.default.promisify(child_process_1.exec);
-function createProject({ useFramer, preferredPackageManager, componentsPath, }) {
+function createProject({ useFramer, preferredPackageManager, componentsPath, usingServerComponents, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const usingFramerInProject = yield (0, helper_1.checkForDependencyInPackageJson)("framer-motion");
         if (useFramer && preferredPackageManager && !usingFramerInProject) {
@@ -40,7 +40,13 @@ function createProject({ useFramer, preferredPackageManager, componentsPath, }) 
         }
         const stepperPath = path_1.default.join(resolvedComponentsPath, "stepper.tsx");
         try {
-            const content = useFramer ? helper_1.framerString : helper_1.twString;
+            const content = useFramer && usingServerComponents
+                ? helper_1.framerStringWithSC
+                : useFramer && !usingServerComponents
+                    ? helper_1.framerString
+                    : !useFramer && usingServerComponents
+                        ? helper_1.twStringWithSC
+                        : helper_1.twString;
             console.log("✨Copying `<Stepper/>` component.");
             yield promises_1.default.writeFile(stepperPath, content);
             console.log("🎉Copy done");

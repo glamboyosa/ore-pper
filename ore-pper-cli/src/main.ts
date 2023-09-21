@@ -1,7 +1,9 @@
 import {
   checkForDependencyInPackageJson,
   framerString,
+  framerStringWithSC,
   twString,
+  twStringWithSC,
 } from "./helper";
 import util from "util";
 import { exec } from "child_process";
@@ -14,12 +16,14 @@ interface projectOptions {
   preferredPackageManager?: "npm" | "yarn" | "pnpm";
   useFramer: boolean;
   componentsPath: string;
+  usingServerComponents: boolean;
 }
 
 export async function createProject({
   useFramer,
   preferredPackageManager,
   componentsPath,
+  usingServerComponents,
 }: projectOptions) {
   const usingFramerInProject = await checkForDependencyInPackageJson(
     "framer-motion"
@@ -48,7 +52,14 @@ export async function createProject({
   const stepperPath = path.join(resolvedComponentsPath, "stepper.tsx");
 
   try {
-    const content = useFramer ? framerString : twString;
+    const content =
+      useFramer && usingServerComponents
+        ? framerStringWithSC
+        : useFramer && !usingServerComponents
+        ? framerString
+        : !useFramer && usingServerComponents
+        ? twStringWithSC
+        : twString;
     console.log("✨Copying `<Stepper/>` component.");
     await fs.writeFile(stepperPath, content);
     console.log("🎉Copy done");

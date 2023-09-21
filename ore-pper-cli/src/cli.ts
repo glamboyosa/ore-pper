@@ -26,6 +26,9 @@ const promptforPkgManager = async () => {
 };
 export async function cli(args: string[]) {
   args;
+  const serverComponentsAnswer = await confirm({
+    message: "Are you using React Server Components ?",
+  });
   const inputAnswer = await input({
     message: "What is the path to your components folder",
     default: "/app/src/components",
@@ -34,7 +37,11 @@ export async function cli(args: string[]) {
     message: "Would you like to use Framer Motion ?",
   });
   if (!answer) {
-    await createProject({ useFramer: false, componentsPath: inputAnswer });
+    await createProject({
+      useFramer: false,
+      componentsPath: inputAnswer,
+      usingServerComponents: serverComponentsAnswer,
+    });
     return;
   }
   const pkg_manager = await promptforPkgManager();
@@ -42,5 +49,6 @@ export async function cli(args: string[]) {
     preferredPackageManager: pkg_manager,
     useFramer: true,
     componentsPath: inputAnswer,
+    usingServerComponents: serverComponentsAnswer,
   });
 }

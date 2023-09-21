@@ -40,6 +40,9 @@ const promptforPkgManager = () => __awaiter(void 0, void 0, void 0, function* ()
 function cli(args) {
     return __awaiter(this, void 0, void 0, function* () {
         args;
+        const serverComponentsAnswer = yield (0, confirm_1.default)({
+            message: "Are you using React Server Components ?",
+        });
         const inputAnswer = yield (0, input_1.default)({
             message: "What is the path to your components folder",
             default: "/app/src/components",
@@ -48,7 +51,11 @@ function cli(args) {
             message: "Would you like to use Framer Motion ?",
         });
         if (!answer) {
-            yield (0, main_1.createProject)({ useFramer: false, componentsPath: inputAnswer });
+            yield (0, main_1.createProject)({
+                useFramer: false,
+                componentsPath: inputAnswer,
+                usingServerComponents: serverComponentsAnswer,
+            });
             return;
         }
         const pkg_manager = yield promptforPkgManager();
@@ -56,6 +63,7 @@ function cli(args) {
             preferredPackageManager: pkg_manager,
             useFramer: true,
             componentsPath: inputAnswer,
+            usingServerComponents: serverComponentsAnswer,
         });
     });
 }
