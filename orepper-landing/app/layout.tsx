@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import Header from "@/components/header/header";
 import { Toaster } from "@/components/ui/toaster";
-
+import { Analytics } from "@vercel/analytics/react";
 const PF = Playfair_Display({
   subsets: ["latin"],
 });
@@ -26,6 +26,7 @@ export default function RootLayout({
           {children}
         </div>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
