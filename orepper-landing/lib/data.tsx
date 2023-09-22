@@ -43,9 +43,7 @@ const data = [
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger>
-              Does I have to use Framer Motion?
-            </AccordionTrigger>
+            <AccordionTrigger>Do I have to use Framer Motion?</AccordionTrigger>
             <AccordionContent>
               No, you can opt-out if you wish, the animation works with plain
               ol&apos; Tailwind CSS. However, Framer Motion is recommended as
