@@ -37,8 +37,8 @@ const data = [
                 Shadcn
               </Link>
               has a very good guide I agree with but basically I do not want it
-              tightly coupled both to design choices, dependencies and packages.
-              This way it is wholly customizable.
+              tightly coupled both to design choices and dependencies. This way
+              it is wholly customizable.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
