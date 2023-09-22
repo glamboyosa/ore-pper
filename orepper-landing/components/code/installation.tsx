@@ -29,7 +29,7 @@ const Installation = () => {
             className="ml-auto cursor-pointer"
           />
         </PopoverTrigger>
-        <PopoverContent className="flex flex-col divide-y-2 cursor-pointer justify-center items-center gap-1 ">
+        <PopoverContent className="flex flex-col  cursor-pointer justify-center items-center gap-1 ">
           {pkgs.map((el) => (
             <div
               key={el}
@@ -51,7 +51,7 @@ const Installation = () => {
                   });
                 }
               }}
-              className=" divide-solid  p-[2px] divide-gray-300 w-full last-of-type:divide-y-0 last-of-type:divide-none hover:bg-zinc-100"
+              className=" p-[2px] w-full last-of-type:divide-y-0 last-of-type:divide-none hover:bg-zinc-100"
             >
               {el}
             </div>
