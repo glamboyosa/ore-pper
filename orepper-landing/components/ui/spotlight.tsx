@@ -6,6 +6,7 @@ import { Button } from "./button";
 import { createOnboardingData } from "@/lib/utils";
 import { data } from "@/lib/data";
 import CardContent from "../card-content";
+import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
 export default function Spotlight() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -67,6 +68,13 @@ export default function Spotlight() {
             Next
           </Button>
         </div>
+      </div>
+      <div className="mt-2 ml-4">
+        <CursorArrowRaysIcon
+          width={30}
+          height={30}
+          className="animate-bounce"
+        />
       </div>
     </motion.div>
   );
