@@ -67,8 +67,8 @@ const data = [
   {
     title: "How it works",
     render: (
-      <Code className="mt-4 items-start">
-        <pre className="whitespace-pre-line !text-white">{demo}</pre>
+      <Code className="mt-4 text-slate-200 items-start">
+        <pre className="whitespace-pre-line">{demo}</pre>
         <ClipboardIcon
           width={40}
           height={40}
