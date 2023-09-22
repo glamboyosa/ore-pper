@@ -40,11 +40,10 @@ export async function createProject({
     );
   }
 
-  let rootDirectory = process.cwd();
-  if (__dirname.includes("dist")) {
-    rootDirectory = __dirname.split("dist")[0];
-  }
+  const rootDirectory = process.cwd();
+
   const resolvedComponentsPath = path.join(rootDirectory, componentsPath);
+
   // if the path does not exist create it
   if (!fss.existsSync(resolvedComponentsPath)) {
     fss.mkdirSync(resolvedComponentsPath, { recursive: true });

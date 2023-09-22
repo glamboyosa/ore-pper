@@ -30,10 +30,7 @@ function createProject({ useFramer, preferredPackageManager, componentsPath, usi
                     ? "pnpm add"
                     : "yarn add"} framer-motion`);
         }
-        let rootDirectory = process.cwd();
-        if (__dirname.includes("dist")) {
-            rootDirectory = __dirname.split("dist")[0];
-        }
+        const rootDirectory = process.cwd();
         const resolvedComponentsPath = path_1.default.join(rootDirectory, componentsPath);
         if (!fs_1.default.existsSync(resolvedComponentsPath)) {
             fs_1.default.mkdirSync(resolvedComponentsPath, { recursive: true });

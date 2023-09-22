@@ -59,7 +59,7 @@ const Stepper = ({ currentStep, numberOfSteps }: StepperProps) => {
   );
   
   return (
-    <>
+    <div className="flex">
       {numberOfPills.map((step) => (
         <motion.div
           layout
@@ -73,7 +73,7 @@ const Stepper = ({ currentStep, numberOfSteps }: StepperProps) => {
           className="w-2 h-2 cursor-pointer mx-1 rounded-full bg-[#E6E8EA]"
         />
       ))}
-    </>
+    </div>
   );
 };
 
@@ -95,7 +95,7 @@ const framerStringWithSC = `
           );
           
           return (
-            <>
+            <div className="flex">
               {numberOfPills.map((step) => (
                 <motion.div
                   layout
@@ -109,7 +109,7 @@ const framerStringWithSC = `
                   className="w-2 h-2 cursor-pointer mx-1 rounded-full bg-[#E6E8EA]"
                 />
               ))}
-            </>
+            </div>
           );
         };
         
@@ -129,14 +129,14 @@ const twString = `
             );
           
             return (
-              <>
+              <div className="flex">
                 {numberOfPills.map((step) => (
                   <div
                     key={step}
                     className={\` h-2 transition-all duration-100 delay-100 ease-in-out cursor-pointer mx-1 rounded-full \${step === currentStep ? "bg-blue-500 w-5" : "bg-[#E6E8EA] w-2"}\`}
                   />
                 ))}
-              </>
+              </div>
             );
           };
           
@@ -157,14 +157,14 @@ const twStringWithSC = `
             );
           
             return (
-              <>
+              <div className="flex">
                 {numberOfPills.map((step) => (
                   <div
                     key={step}
                     className={\` h-2 transition-all duration-100 delay-100 ease-in-out cursor-pointer mx-1 rounded-full \${step === currentStep ? "bg-blue-500 w-5" : "bg-[#E6E8EA] w-2"}\`}
                   />
                 ))}
-              </>
+              </div>
             );
           };
           
