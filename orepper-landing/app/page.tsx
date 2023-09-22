@@ -4,10 +4,10 @@ import TypingComponent from "@/components/ui/typing";
 
 export default function Home() {
   return (
-    <main className="mt-10">
+    <main className="mt-10 ml-6 md:ml-4">
       <h1
         className={
-          "ml-2 text-4xl flex flex-col text-center md:text-5xl  w-full p-2  mb-2"
+          " text-3xl flex flex-col text-center md:text-5xl  w-full p-2  mb-2"
         }
       >
         Quality, Beautiful Stepper Component for

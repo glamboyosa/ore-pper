@@ -21,7 +21,7 @@ export default function Spotlight() {
   return (
     <motion.div
       layout
-      className="group relative max-w-md w-[448px] text-center h-[650px]   rounded-xl border border-white/10 bg-slate-50 px-8 py-16 shadow-2xl"
+      className="group relative w-[360px] md:w-[440px] text-center h-[650px]   rounded-xl border border-white/10 bg-slate-50 px-8 py-16 shadow-2xl"
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -37,7 +37,7 @@ export default function Spotlight() {
         }}
       />
       <CardContent data={onboardingData[step]} />
-      <div className="mt-8 gap-4 flex items-center">
+      <div className="mt-14 gap-4 flex items-center md:mt-8">
         <Stepper currentStep={step} />
 
         <div className="items-center gap-2 flex ml-auto mr-2">
