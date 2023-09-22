@@ -7,7 +7,7 @@ type CardContentProps = {
 
 const CardContent = ({ data }: CardContentProps) => {
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div className="flex h-3/4 justify-center items-center flex-col">
       <h3 className="text-5xl font-bold tracking-tight text-gray-800">
         {data.title}
       </h3>

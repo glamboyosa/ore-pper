@@ -1,14 +1,6 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { MouseEvent, useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Link from "next/link";
-import Code from "../code/code";
 import Stepper from "../stepper";
 import { Button } from "./button";
 import { createOnboardingData } from "@/lib/utils";
@@ -29,7 +21,7 @@ export default function Spotlight() {
   return (
     <motion.div
       layout
-      className="group relative max-w-md text-center   rounded-xl border border-white/10 bg-slate-50 px-8 py-16 shadow-2xl"
+      className="group relative max-w-md w-[448px] text-center h-[650px]   rounded-xl border border-white/10 bg-slate-50 px-8 py-16 shadow-2xl"
       onMouseMove={handleMouseMove}
     >
       <motion.div
