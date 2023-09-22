@@ -30,10 +30,9 @@ const data = [
             <AccordionTrigger>Why copy/paste?</AccordionTrigger>
             <AccordionContent>
               <Link
-                as="span"
-                href="https://ui.shadcn.com/docs#:~:text=as%20a%20dependency%3F-,The,-idea%20behind%20this"
+                href="https://ui.shadcn.com/docs#:~:text=FAQ-,Why,-copy/paste%20and"
                 target="_blank"
-                className="bg-yellow-300 p-1 mr-1 hover:bg-yellow-400 hover:underline"
+                className=" p-1 mr-1 hover:underline"
               >
                 Shadcn
               </Link>
