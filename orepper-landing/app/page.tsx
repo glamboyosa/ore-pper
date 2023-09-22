@@ -7,12 +7,15 @@ export default function Home() {
     <main className="mt-10">
       <h1
         className={
-          "ml-2 text-4xl flex flex-col text-center md:text-5xl  w-full p-2  mb-4"
+          "ml-2 text-4xl flex flex-col text-center md:text-5xl  w-full p-2  mb-2"
         }
       >
         Quality, Beautiful Stepper Component for
         <TypingComponent />
       </h1>
+      <p className="ml-2 text-xl mb-4 md:2xl">
+        Built with Tailwind CSS and Framer Motion ✨.
+      </p>
       <div className="flex justify-center items-center">
         <Spotlight />
       </div>

@@ -42,6 +42,14 @@ const data = [
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
+          <AccordionTrigger>Does I have to use Framer Motion?</AccordionTrigger>
+          <AccordionContent>
+            No, you can opt-out if you wish, the animation works with plain
+            ol&apos; Tailwind CSS. However, Framer Motion is recommended as the
+            optimizations make it much sleeker.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
           <AccordionTrigger>
             Does it support React Server Components?
           </AccordionTrigger>
@@ -50,6 +58,12 @@ const data = [
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+    ),
+  },
+  {
+    title: "Can I see an example?",
+    render: (
+      <p className="text-2xl md:text-2xl mt-4">You&apos;re using it 😉</p>
     ),
   },
   {
@@ -68,10 +82,6 @@ const data = [
         />
       </Code>
     ),
-  },
-  {
-    title: "Can I see an example?",
-    render: <p className="text-2xl md:text-3xl mt-4">You just used it 😉</p>,
   },
 ];
 export { data };
