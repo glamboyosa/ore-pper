@@ -25,7 +25,7 @@ const Installation = () => {
           <ClipboardIcon
             width={20}
             height={20}
-            fill="#fff"
+            fill="#f5f2f2"
             className="ml-auto cursor-pointer"
           />
         </PopoverTrigger>

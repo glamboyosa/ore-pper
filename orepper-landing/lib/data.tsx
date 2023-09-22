@@ -72,7 +72,7 @@ const data = [
         <ClipboardIcon
           width={40}
           height={40}
-          fill="#fff"
+          fill="#f5f2f2"
           className="ml-auto cursor-pointer"
           onClick={async () => {
             await copyTextToClipboard(demo);
