@@ -65,16 +65,10 @@ const data = [
     ),
   },
   {
-    title: "Can I see an example?",
-    render: (
-      <p className="text-2xl md:text-2xl mt-4">You&apos;re using it 😉</p>
-    ),
-  },
-  {
     title: "How it works",
     render: (
       <Code className="mt-4 items-start">
-        <pre className="whitespace-pre-line text-slate-50">{demo}</pre>
+        <pre className="whitespace-pre-line !text-white">{demo}</pre>
         <ClipboardIcon
           width={40}
           height={40}
@@ -85,6 +79,12 @@ const data = [
           }}
         />
       </Code>
+    ),
+  },
+  {
+    title: "Can I see an example?",
+    render: (
+      <p className="text-2xl md:text-2xl mt-4">You&apos;re using it 😉</p>
     ),
   },
 ];
