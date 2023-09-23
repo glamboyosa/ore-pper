@@ -3,13 +3,12 @@ import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "./svgs";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import useMounted from "@/lib/useMounted";
 
 const ThemeChanger = () => {
   const { resolvedTheme, setTheme, theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted] = useMounted();
+
   if (!mounted) {
     return null;
   }

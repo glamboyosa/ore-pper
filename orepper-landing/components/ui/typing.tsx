@@ -1,7 +1,15 @@
 "use client";
+import useMounted from "@/lib/useMounted";
+import { useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 
 const TypingComponent = () => {
+  const [mounted] = useMounted();
+  if (!mounted) {
+    return (
+      <span className="bg-yellow-200 w-[83%] p-1 md:w-[70%] lg:w-1/2 mt-3 h-14 rounded-sm"></span>
+    );
+  }
   return (
     <TypeAnimation
       sequence={[

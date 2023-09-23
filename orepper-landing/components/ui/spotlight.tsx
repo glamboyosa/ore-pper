@@ -1,6 +1,6 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 import Stepper from "../stepper";
 import { Button } from "./button";
 import { createOnboardingData } from "@/lib/utils";
@@ -8,9 +8,17 @@ import { data } from "@/lib/data";
 import CardContent from "../card-content";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
+import useMounted from "@/lib/useMounted";
 export default function Spotlight() {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useMounted(
+    useCallback(() => {
+      setTimeout(() => {
+        setMounted(true);
+      }, 1000);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+  );
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const [step, setStep] = useState(1);
@@ -21,13 +29,7 @@ export default function Spotlight() {
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMounted(true);
-    }, 1000);
 
-    return () => clearTimeout(timeout);
-  }, []);
   if (!mounted) {
     return (
       <motion.div
