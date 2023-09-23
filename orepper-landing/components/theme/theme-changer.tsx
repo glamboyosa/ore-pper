@@ -15,11 +15,33 @@ const ThemeChanger = () => {
   }
 
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {resolvedTheme === "light" ? (
-        <SunIcon onClick={() => setTheme("dark")} width={24} height={24} />
+        <SunIcon
+          initial={{ opacity: 0, pathLength: 0, height: 0 }}
+          animate={{ opacity: 1, pathLength: 1, height: "auto" }}
+          exit={{ opacity: 0, pathLength: 0, height: 0 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+          onClick={() => setTheme("dark")}
+          width={26}
+          height={26}
+        />
       ) : (
-        <MoonIcon onClick={() => setTheme("light")} width={24} height={24} />
+        <MoonIcon
+          initial={{ opacity: 0, pathLength: 0, height: 0 }}
+          animate={{ opacity: 1, pathLength: 1, height: "auto" }}
+          exit={{ opacity: 0, pathLength: 0, height: 0 }}
+          transition={{
+            duration: 0.75,
+            ease: "easeInOut",
+          }}
+          onClick={() => setTheme("light")}
+          width={24}
+          height={24}
+        />
       )}
     </AnimatePresence>
   );
