@@ -5,6 +5,7 @@ import { Playfair_Display } from "next/font/google";
 import Header from "@/components/header/header";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
+import { Providers } from "./providers";
 const PF = Playfair_Display({
   subsets: ["latin"],
 });
@@ -19,13 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen", PF.className)}>
-        <Header />
-        <div className="flex flex-col justify-center items-center">
-          {children}
-        </div>
-        <Toaster />
+        <Providers>
+          <Header />
+          <div className="flex flex-col justify-center items-center">
+            {children}
+          </div>
+          <Toaster />
+        </Providers>
         <Analytics />
       </body>
     </html>

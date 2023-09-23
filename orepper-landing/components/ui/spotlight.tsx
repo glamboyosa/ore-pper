@@ -1,13 +1,16 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Stepper from "../stepper";
 import { Button } from "./button";
 import { createOnboardingData } from "@/lib/utils";
 import { data } from "@/lib/data";
 import CardContent from "../card-content";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "next-themes";
 export default function Spotlight() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const [step, setStep] = useState(1);
@@ -18,11 +21,25 @@ export default function Spotlight() {
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setMounted(true);
+    }, 1000);
 
+    return () => clearTimeout(timeout);
+  }, []);
+  if (!mounted) {
+    return (
+      <motion.div
+        className="w-[360px] animate-pulse bg-slate-200 dark:bg-gray-50 md:w-[440px] h-[650px] rounded-xl px-8 py-16 shadow-2xl"
+        style={{ background: useMotionTemplate`` }}
+      ></motion.div>
+    );
+  }
   return (
     <motion.div
       layout
-      className="group relative w-[360px] md:w-[440px] text-center h-[650px]   rounded-xl border border-white/10 bg-slate-50 px-8 py-16 shadow-2xl"
+      className="group relative w-[360px] md:w-[440px] text-center h-[650px]   rounded-xl border border-white/10 bg-slate-50 dark:bg-slate-900 px-8 py-16 shadow-2xl"
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -31,7 +48,11 @@ export default function Spotlight() {
           background: useMotionTemplate`
             radial-gradient(
               650px circle at ${mouseX}px ${mouseY}px,
-              rgba(30, 30, 30, 0.15),
+              ${
+                resolvedTheme === "light"
+                  ? "rgba(30, 30, 30, 0.15)"
+                  : "rgba(243, 238, 238, 0.15)"
+              },
               transparent 80%
             )
           `,
@@ -44,7 +65,7 @@ export default function Spotlight() {
         <div className="items-center gap-2 flex ml-auto mr-2">
           <Button
             variant={"outline"}
-            className="rounded-sm px-8 py-3 bg-zinc-200"
+            className="rounded-sm px-8 py-3 dark:bg-slate-700 bg-zinc-200"
             disabled={step === 1}
             onClick={() => {
               if (step === 1) {
