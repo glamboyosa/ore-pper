@@ -13,7 +13,7 @@ import fss from "fs";
 const execAsync = util.promisify(exec);
 
 interface projectOptions {
-  preferredPackageManager?: "npm" | "yarn" | "pnpm";
+  preferredPackageManager?: "npm" | "yarn" | "pnpm" | "bun";
   useFramer: boolean;
   componentsPath: string;
   usingServerComponents: boolean;
@@ -35,6 +35,8 @@ export async function createProject({
           ? "npm install"
           : preferredPackageManager === "pnpm"
           ? "pnpm add"
+          : preferredPackageManager === "bun"
+          ? "bun install"
           : "yarn add"
       } framer-motion`
     );

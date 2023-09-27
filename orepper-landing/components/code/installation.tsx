@@ -11,9 +11,9 @@ import { copyTextToClipboard } from "@/lib/copyToClipboard";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
-const pkgs = ["npm", "yarn", "pnpm"];
+const pkgs = ["npm", "yarn", "pnpm", "bun"];
 const Installation = () => {
-  const code = `npx ore-pper-cli`;
+  const code = `npx ore-pper-cli@latest`;
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   return (
@@ -36,7 +36,11 @@ const Installation = () => {
               onClick={async () => {
                 try {
                   await copyTextToClipboard(
-                    el === "pnpm" ? "pnpm dlx ore-pper-cli" : code
+                    el === "pnpm"
+                      ? "pnpm dlx ore-pper-cli@latest"
+                      : el === "bun"
+                      ? "bunx ore-pper-cli@latest"
+                      : code
                   );
                   toast({
                     title: "Success ✅",

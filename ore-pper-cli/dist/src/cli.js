@@ -33,6 +33,10 @@ const promptforPkgManager = () => __awaiter(void 0, void 0, void 0, function* ()
                 name: "pnpm",
                 value: "pnpm",
             },
+            {
+                name: "bun",
+                value: "bun",
+            },
         ],
     });
     return answer;

@@ -28,7 +28,9 @@ function createProject({ useFramer, preferredPackageManager, componentsPath, usi
                 ? "npm install"
                 : preferredPackageManager === "pnpm"
                     ? "pnpm add"
-                    : "yarn add"} framer-motion`);
+                    : preferredPackageManager === "bun"
+                        ? "bun install"
+                        : "yarn add"} framer-motion`);
         }
         const rootDirectory = process.cwd();
         const resolvedComponentsPath = path_1.default.join(rootDirectory, componentsPath);

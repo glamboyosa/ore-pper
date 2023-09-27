@@ -20,9 +20,13 @@ const promptforPkgManager = async () => {
         name: "pnpm",
         value: "pnpm",
       },
+      {
+        name: "bun",
+        value: "bun",
+      },
     ],
   });
-  return answer as "npm" | "yarn" | "pnpm";
+  return answer as "npm" | "yarn" | "pnpm" | "bun";
 };
 export async function cli(args: string[]) {
   args;
