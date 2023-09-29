@@ -33,7 +33,11 @@ function checkForDependencyInPackageJson(dependencyName) {
         fs.accessSync(packageJsonPath, fs.constants.F_OK);
         const packageJsonContent = require(packageJsonPath);
         const dependencies = packageJsonContent.dependencies || {};
+        const devDependencies = packageJsonContent.devDependencies || {};
         if (dependencies[dependencyName]) {
+            return true;
+        }
+        else if (devDependencies[dependencyName]) {
             return true;
         }
         else {

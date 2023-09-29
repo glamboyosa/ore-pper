@@ -63,6 +63,34 @@ export async function createProject({
         : twString;
     console.log("✨Copying `<Stepper/>` component.");
     await fs.writeFile(stepperPath, content);
+    const usingPrettier = await checkForDependencyInPackageJson("prettier");
+    if (usingPrettier) {
+      // doesn't matter much except if prettier is not at least installed
+      // it may not work
+      await execAsync(
+        `${
+          preferredPackageManager === "npm"
+            ? "npx prettier"
+            : preferredPackageManager === "pnpm"
+            ? "pnpm exec prettier"
+            : preferredPackageManager === "bun"
+            ? "bunx prettier"
+            : "yarn prettier"
+        } ${stepperPath} --write`
+      );
+    } else {
+      await execAsync(
+        `${
+          preferredPackageManager === "npm"
+            ? "npx prettier"
+            : preferredPackageManager === "pnpm"
+            ? "pnpm exec prettier"
+            : preferredPackageManager === "bun"
+            ? "bunx prettier"
+            : "yarn prettier"
+        } ${stepperPath} --write`
+      );
+    }
     console.log("🎉Copy done");
   } catch (_) {
     console.log("Something went wrong copying files...");

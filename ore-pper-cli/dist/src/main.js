@@ -48,6 +48,25 @@ function createProject({ useFramer, preferredPackageManager, componentsPath, usi
                         : helper_1.twString;
             console.log("✨Copying `<Stepper/>` component.");
             yield promises_1.default.writeFile(stepperPath, content);
+            const usingPrettier = yield (0, helper_1.checkForDependencyInPackageJson)("prettier");
+            if (usingPrettier) {
+                yield execAsync(`${preferredPackageManager === "npm"
+                    ? "npx prettier"
+                    : preferredPackageManager === "pnpm"
+                        ? "pnpm exec prettier"
+                        : preferredPackageManager === "bun"
+                            ? "bunx prettier"
+                            : "yarn prettier"} ${stepperPath} --write`);
+            }
+            else {
+                yield execAsync(`${preferredPackageManager === "npm"
+                    ? "npx prettier"
+                    : preferredPackageManager === "pnpm"
+                        ? "pnpm exec prettier"
+                        : preferredPackageManager === "bun"
+                            ? "bunx prettier"
+                            : "yarn prettier"} ${stepperPath} --write`);
+            }
             console.log("🎉Copy done");
         }
         catch (_) {

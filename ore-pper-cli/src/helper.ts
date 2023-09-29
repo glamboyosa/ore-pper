@@ -13,7 +13,10 @@ function checkForDependencyInPackageJson(dependencyName: string) {
 
     // Check if the specified dependency is in the dependencies object
     const dependencies = packageJsonContent.dependencies || {};
+    const devDependencies = packageJsonContent.devDependencies || {};
     if (dependencies[dependencyName]) {
+      return true;
+    } else if (devDependencies[dependencyName]) {
       return true;
     } else {
       return false;
