@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cli = void 0;
+exports.cli = cli;
 const select_1 = __importDefault(require("@inquirer/select"));
 const confirm_1 = __importDefault(require("@inquirer/confirm"));
 const input_1 = __importDefault(require("@inquirer/input"));
@@ -71,5 +71,4 @@ function cli(args) {
         });
     });
 }
-exports.cli = cli;
 //# sourceMappingURL=cli.js.map

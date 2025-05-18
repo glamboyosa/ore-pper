@@ -17,6 +17,18 @@ interface projectOptions {
   useFramer: boolean;
   componentsPath: string;
   usingServerComponents: boolean;
+  formatCode?: boolean;
+}
+
+async function findComponentsDirectory(startPath: string): Promise<string | null> {
+  const possibleDirs = ['components', 'src/components', 'app/components'];
+  for (const dir of possibleDirs) {
+    const fullPath = path.join(startPath, dir);
+    if (fss.existsSync(fullPath)) {
+      return fullPath;
+    }
+  }
+  return null;
 }
 
 export async function createProject({
@@ -24,32 +36,32 @@ export async function createProject({
   preferredPackageManager,
   componentsPath,
   usingServerComponents,
+  formatCode = false,
 }: projectOptions) {
-  const usingFramerInProject = await checkForDependencyInPackageJson(
-    "framer-motion"
-  );
+  const usingFramerInProject = await checkForDependencyInPackageJson("@motion/react");
   if (useFramer && preferredPackageManager && !usingFramerInProject) {
     await execAsync(
-      `${
-        preferredPackageManager === "npm"
-          ? "npm install"
-          : preferredPackageManager === "pnpm"
+      `${preferredPackageManager === "npm"
+        ? "npm install"
+        : preferredPackageManager === "pnpm"
           ? "pnpm add"
           : preferredPackageManager === "bun"
-          ? "bun install"
-          : "yarn add"
-      } framer-motion`
+            ? "bun add"
+            : "yarn add"
+      } @motion/react`
     );
   }
 
   const rootDirectory = process.cwd();
+  let resolvedComponentsPath = path.join(rootDirectory, componentsPath);
 
-  const resolvedComponentsPath = path.join(rootDirectory, componentsPath);
-
-  // if the path does not exist create it
   if (!fss.existsSync(resolvedComponentsPath)) {
-    fss.mkdirSync(resolvedComponentsPath, { recursive: true });
+    const foundComponentsDir = await findComponentsDirectory(rootDirectory);
+    if (foundComponentsDir) {
+      resolvedComponentsPath = foundComponentsDir;
+    }
   }
+
   const stepperPath = path.join(resolvedComponentsPath, "stepper.tsx");
 
   try {
@@ -57,43 +69,44 @@ export async function createProject({
       useFramer && usingServerComponents
         ? framerStringWithSC
         : useFramer && !usingServerComponents
-        ? framerString
-        : !useFramer && usingServerComponents
-        ? twStringWithSC
-        : twString;
+          ? framerString
+          : !useFramer && usingServerComponents
+            ? twStringWithSC
+            : twString;
     console.log("✨Copying `<Stepper/>` component.");
     await fs.writeFile(stepperPath, content);
-    const usingPrettier = await checkForDependencyInPackageJson("prettier");
-    if (usingPrettier) {
-      // doesn't matter much except if prettier is not at least installed
-      // it may not work
-      await execAsync(
-        `${
-          preferredPackageManager === "npm"
+
+    if (formatCode) {
+      const usingPrettier = await checkForDependencyInPackageJson("prettier");
+      const usingBiome = await checkForDependencyInPackageJson("@biomejs/biome");
+
+      if (usingBiome) {
+        await execAsync(
+          `${preferredPackageManager === "npm"
+            ? "npx"
+            : preferredPackageManager === "pnpm"
+              ? "pnpm dlx"
+              : preferredPackageManager === "bun"
+                ? "bunx --bun"
+                : "yarn"
+          } @biomejs/biome check --apply --unsafe ${stepperPath}`
+        );
+      } else if (usingPrettier) {
+        await execAsync(
+          `${preferredPackageManager === "npm"
             ? "npx prettier"
             : preferredPackageManager === "pnpm"
-            ? "pnpm exec prettier"
-            : preferredPackageManager === "bun"
-            ? "bunx prettier"
-            : "yarn prettier"
-        } ${stepperPath} --write`
-      );
-    } else {
-      await execAsync(
-        `${
-          preferredPackageManager === "npm"
-            ? "npx prettier"
-            : preferredPackageManager === "pnpm"
-            ? "pnpm exec prettier"
-            : preferredPackageManager === "bun"
-            ? "bunx prettier"
-            : "yarn prettier"
-        } ${stepperPath} --write`
-      );
+              ? "pnpm dlx prettier"
+              : preferredPackageManager === "bun"
+                ? "bunx prettier"
+                : "yarn prettier"
+          } ${stepperPath} --write`
+        );
+      }
     }
     console.log("🎉Copy done");
-  } catch (_) {
-    console.log("Something went wrong copying files...");
+  } catch (error) {
+    console.log("Something went wrong:", error);
   }
   return true;
 }

@@ -15,15 +15,26 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.twStringWithSC = exports.twString = exports.framerStringWithSC = exports.framerString = exports.checkForDependencyInPackageJson = void 0;
+exports.twStringWithSC = exports.twString = exports.framerStringWithSC = exports.framerString = void 0;
+exports.checkForDependencyInPackageJson = checkForDependencyInPackageJson;
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 function checkForDependencyInPackageJson(dependencyName) {
@@ -48,33 +59,46 @@ function checkForDependencyInPackageJson(dependencyName) {
         return false;
     }
 }
-exports.checkForDependencyInPackageJson = checkForDependencyInPackageJson;
 const framerString = `
-import { motion } from "framer-motion";
+import { motion } from "@motion/react";
+
 type StepperProps = {
   currentStep: number;
   numberOfSteps?: number;
+  onStepClick?: (step: number) => void;
+  activeColor?: string;
+  inactiveColor?: string;
+  activeWidth?: string;
+  inactiveWidth?: string;
 };
 
-const Stepper = ({ currentStep, numberOfSteps }: StepperProps) => {
-  const numberOfPills = Array.from(
-    { length: numberOfSteps ?? 3 },
-    (_, index) => index + 1
-  );
+const Stepper = ({ 
+  currentStep, 
+  numberOfSteps = 3,
+  onStepClick,
+  activeColor = "hsl(214, 93%, 55%)",
+  inactiveColor = "#E6E8EA",
+  activeWidth = "20px",
+  inactiveWidth = "8px"
+}: StepperProps) => {
+  const steps = Array.from({ length: numberOfSteps }, (_, i) => i + 1);
+  const isClickable = typeof onStepClick === "function";
   
   return (
-    <div className="flex">
-      {numberOfPills.map((step) => (
+    <div className="flex items-center gap-1">
+      {steps.map((step) => (
         <motion.div
           layout
           key={step}
           initial={false}
           animate={{
-            width: currentStep === step ? "20px" : "8px",
-            backgroundColor:
-              currentStep === step ? "hsl(214, 93%, 55%)" : "#E6E8EA",
+            width: currentStep === step ? activeWidth : inactiveWidth,
+            backgroundColor: currentStep === step ? activeColor : inactiveColor,
           }}
-          className="w-2 h-2 cursor-pointer mx-1 rounded-full bg-[#E6E8EA]"
+          className={\`h-2 rounded-full \${isClickable ? "cursor-pointer" : ""}\`}
+          onClick={() => isClickable && onStepClick(step)}
+          whileHover={isClickable ? { scale: 1.1 } : undefined}
+          whileTap={isClickable ? { scale: 0.95 } : undefined}
         />
       ))}
     </div>
@@ -86,31 +110,45 @@ export default Stepper;
 exports.framerString = framerString;
 const framerStringWithSC = `
         "use client";
-        import { motion } from "framer-motion";
+        import { motion } from "@motion/react";
+
         type StepperProps = {
           currentStep: number;
           numberOfSteps?: number;
+          onStepClick?: (step: number) => void;
+          activeColor?: string;
+          inactiveColor?: string;
+          activeWidth?: string;
+          inactiveWidth?: string;
         };
         
-        const Stepper = ({ currentStep, numberOfSteps }: StepperProps) => {
-          const numberOfPills = Array.from(
-            { length: numberOfSteps ?? 3 },
-            (_, index) => index + 1
-          );
+        const Stepper = ({ 
+          currentStep, 
+          numberOfSteps = 3,
+          onStepClick,
+          activeColor = "hsl(214, 93%, 55%)",
+          inactiveColor = "#E6E8EA",
+          activeWidth = "20px",
+          inactiveWidth = "8px"
+        }: StepperProps) => {
+          const steps = Array.from({ length: numberOfSteps }, (_, i) => i + 1);
+          const isClickable = typeof onStepClick === "function";
           
           return (
-            <div className="flex">
-              {numberOfPills.map((step) => (
+            <div className="flex items-center gap-1">
+              {steps.map((step) => (
                 <motion.div
                   layout
                   key={step}
                   initial={false}
                   animate={{
-                    width: currentStep === step ? "20px" : "8px",
-                    backgroundColor:
-                      currentStep === step ? "hsl(214, 93%, 55%)" : "#E6E8EA",
+                    width: currentStep === step ? activeWidth : inactiveWidth,
+                    backgroundColor: currentStep === step ? activeColor : inactiveColor,
                   }}
-                  className="w-2 h-2 cursor-pointer mx-1 rounded-full bg-[#E6E8EA]"
+                  className={\`h-2 rounded-full \${isClickable ? "cursor-pointer" : ""}\`}
+                  onClick={() => isClickable && onStepClick(step)}
+                  whileHover={isClickable ? { scale: 1.1 } : undefined}
+                  whileTap={isClickable ? { scale: 0.95 } : undefined}
                 />
               ))}
             </div>
