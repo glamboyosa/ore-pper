@@ -11,7 +11,6 @@ type StepperProps = {
   activeWidth?: string;
   inactiveWidth?: string;
 };
-
 const Stepper = ({
   currentStep,
   numberOfSteps = 3,
