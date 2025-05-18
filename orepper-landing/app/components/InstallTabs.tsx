@@ -15,6 +15,7 @@ export function InstallTabs() {
     const [selected, setSelected] = useState<PackageManager>("npm");
     const copyPromise = async (selected: PackageManager) => {
         try {
+            await new Promise(resolve => setTimeout(resolve, 500))
             await navigator.clipboard.writeText(COMMANDS[selected])
 
         } catch (error) {
@@ -44,7 +45,7 @@ export function InstallTabs() {
                         onClick={() => {
                             toast.promise(copyPromise(selected), {
                                 loading: "Copying to clipboard...",
-                                success: "Command copied to clipboard",
+                                success: () => "Command copied to clipboard",
                                 error: "Failed to copy to clipboard",
                             })
                         }}
