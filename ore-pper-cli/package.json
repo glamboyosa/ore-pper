@@ -1,6 +1,6 @@
 {
   "name": "ore-pper-cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "ore-pper CLI tool",
   "main": "dist/src/index.js",
   "bin": {

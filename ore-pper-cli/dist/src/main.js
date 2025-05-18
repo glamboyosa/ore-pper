@@ -34,7 +34,7 @@ function findComponentsDirectory(startPath) {
 }
 function createProject(_a) {
     return __awaiter(this, arguments, void 0, function* ({ useFramer, preferredPackageManager, componentsPath, usingServerComponents, formatCode = false, }) {
-        const usingFramerInProject = yield (0, helper_1.checkForDependencyInPackageJson)("@motion/react");
+        const usingFramerInProject = yield (0, helper_1.checkForDependencyInPackageJson)("motion/react");
         if (useFramer && preferredPackageManager && !usingFramerInProject) {
             yield execAsync(`${preferredPackageManager === "npm"
                 ? "npm install"
@@ -42,7 +42,7 @@ function createProject(_a) {
                     ? "pnpm add"
                     : preferredPackageManager === "bun"
                         ? "bun add"
-                        : "yarn add"} @motion/react`);
+                        : "yarn add"} motion/react`);
         }
         const rootDirectory = process.cwd();
         let resolvedComponentsPath = path_1.default.join(rootDirectory, componentsPath);
