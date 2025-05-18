@@ -1,7 +1,7 @@
 type CardContentProps = {
   data: {
     title: string;
-    render: JSX.Element;
+    render: React.ReactNode;
   };
 };
 

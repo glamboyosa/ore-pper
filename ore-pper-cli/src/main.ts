@@ -38,7 +38,7 @@ export async function createProject({
   usingServerComponents,
   formatCode = false,
 }: projectOptions) {
-  const usingFramerInProject = await checkForDependencyInPackageJson("motion/react");
+  const usingFramerInProject = await checkForDependencyInPackageJson("motion");
   if (useFramer && preferredPackageManager && !usingFramerInProject) {
     await execAsync(
       `${preferredPackageManager === "npm"
@@ -48,7 +48,7 @@ export async function createProject({
           : preferredPackageManager === "bun"
             ? "bun add"
             : "yarn add"
-      } motion/react`
+      } motion`
     );
   }
 

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import Stepper from "../stepper";
 import { Button } from "./button";
