@@ -26,7 +26,7 @@ function checkForDependencyInPackageJson(dependencyName: string) {
   }
 }
 const framerString = `
-import { motion } from "@motion/react";
+import { motion } from "motion/react";
 
 type StepperProps = {
   currentStep: number;
@@ -75,7 +75,7 @@ export default Stepper;
         `;
 const framerStringWithSC = `
         "use client";
-        import { motion } from "@motion/react";
+        import { motion } from "motion/react";
 
         type StepperProps = {
           currentStep: number;
