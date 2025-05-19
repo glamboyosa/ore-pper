@@ -1,11 +1,11 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
-import Stepper from "../stepper";
+import Stepper from "@/app/components/stepper";
 import { Button } from "./button";
 import { createOnboardingData } from "@/lib/utils";
 import { data } from "@/lib/data";
-import CardContent from "../card-content";
+import CardContent from "@/components/card-content";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
 import useMounted from "@/lib/useMounted";
@@ -50,11 +50,10 @@ export default function Spotlight() {
           background: useMotionTemplate`
             radial-gradient(
               650px circle at ${mouseX}px ${mouseY}px,
-              ${
-                resolvedTheme === "light"
-                  ? "rgba(30, 30, 30, 0.15)"
-                  : "rgba(243, 238, 238, 0.15)"
-              },
+              ${resolvedTheme === "light"
+              ? "rgba(30, 30, 30, 0.15)"
+              : "rgba(243, 238, 238, 0.15)"
+            },
               transparent 80%
             )
           `,
